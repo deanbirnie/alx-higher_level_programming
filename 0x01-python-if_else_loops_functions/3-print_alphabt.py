@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 for a in range(97, 123):
-    if a != ord('e') or a != ord('q'):
-        print("{}".format(chr(a)), end="")
-    else:
+    if a == ord('e'):
         continue
+    elif a == ord('q'):
+        continue
+    else:
+        print("{}".format(chr(a)), end="")
