@@ -15,9 +15,8 @@ Printing the name with both first name and last name:
     >>> say_my_name("John", "Smith")
     My name is John Smith
 
-Printing the name with only the first name:
     >>> say_my_name("Bob")
-    My name is Bob
+    My name is Bob 
 
 ==================
 Exception Handling
@@ -49,7 +48,7 @@ Passing no arguments:
 
 Printing the name with empty first name and last name:
     >>> say_my_name("", "")
-    My name is 
+    My name is  
 
 Printing the name with only the last name:
     >>> say_my_name("", "Smith")
