@@ -1,0 +1,174 @@
+=========================================
+All test cases for 0-add_integer function
+=========================================
+
+The 0-add_integer function takes two values that must each be either an integer
+or float value. The values are checked against this criteria and errors raised
+if criteria is not met. Finally, values are casted into integers before adding
+them together and returning the sum of their values.
+
+Usage:
+add_integer(a, b)
+
+================================================================================
+
+Import the module:
+       >>> add_integer = __import__('0-add_integer').add_integer
+
+======================
+Testing integer values
+======================
+
+Adding two positive integers:
+       >>> add_integer(5, 5)
+       10
+
+Adding one positive integer and zero:
+       >>> add_integer(0, 5)
+       5
+
+Adding one positive integer and one negative integer:
+       >>> add_integer(5, -5)
+       0
+
+Adding two negative integers:
+       >>> add_integer(-5, -5)
+       -10
+
+Adding one negative integer and zero:
+       >>> add_integer(-5, 0)
+       -5
+
+Adding zeros:
+       >>> add_integer(0, 0)
+       0
+
+====================
+Testing float values
+====================
+
+Adding two positive float values:
+       >>> add_integer(1.2, 1.8)
+       2
+
+Adding one positive float value and zero:
+       >>> add_integer(1.2, 0)
+       1
+
+Adding two negative float values:
+       >>> add_integer(-1.2, -1.8)
+       -2
+
+Adding one negative float value and zero:
+       >>> add_integer(-1.2, 0)
+       -1
+
+Adding zero float values:
+       >>> add_integer(0.2, 0.8)
+       0
+
+================================
+Testing integer and float values
+================================
+
+Adding one positive integer value and one positive float value:
+       >>> add_integer(5, 5.8)
+       10
+
+Adding one negative float value and one positive integer value:
+       >>> add_integer(-5.8, 5)
+       0
+
+Adding one negative integer value and one negative float value:
+       >>> add_integer(-5, -5.8)
+       -10
+
+Adding one positive float value and one negative integer value:
+       >>> add_integer(5.8, -5)
+       0
+
+======================
+Testing default values
+======================
+
+Adding one positive integer value and the default value for argument b:
+       >>> add_integer(2)
+       100
+
+Adding one positive float value and the default value for argument b:
+       >>> add_integer(2.8)
+       100
+
+Adding zero and the default value for argument b:
+       >>> add_integer(0)
+       98
+
+Adding zero and an integer value the same as the default value for argument b:
+       >>> add_integer(0, 98)
+       98
+
+==================
+Testing TypeErrors
+==================
+
+Passing nothing to the function:
+       >>> add_integer()
+       Traceback (most recent call last):
+       		 ...
+       TypeError: add_integer() missing 1 required positional argument: 'a'
+
+Passing None to the function:
+       >>> add_integer(None)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: a must be an integer
+
+Adding None and None:
+       >>> add_integer(None, None)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: a must be an integer
+
+Adding an integer value and a letter:
+       >>> add_integer(5, 'a')
+       Traceback (most recent call last):
+       		 ...
+       TypeError: b must be an integer
+
+Adding a string and a float value:
+       >>> add_integer("test", 5)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: a must be an integer
+
+Adding a tuple and the default value for argument b:
+       >>> add_integer((5, 5),)
+       Traceback (most recent call last):
+       		 ...
+       TypeError: a must be an integer
+
+Adding a list and the default value for argument b:
+       >>> add_integer([1, 2, 3],)
+       Traceback (most recent call last):
+                 ...
+       TypeError: a must be an integer
+
+====================
+Testing large values
+====================
+
+Adding one very large number and the default value for argument b:
+       >>> add_integer(float('inf'),)
+       Traceback (most recent call last):
+       		 ...
+       OverflowError: cannot convert float infinity to integer
+
+==================
+Testing NaN values
+==================
+
+Adding NaN to default value for argument b:
+       >>> add_integer(float('nan'),)
+       Traceback (most recent call last):
+                 ...
+       ValueError: cannot convert float NaN to integer
