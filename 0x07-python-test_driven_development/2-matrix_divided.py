@@ -1,12 +1,25 @@
 #!/usr/bin/python3
 
-""""""
+"""A module for matrix division operation."""
 
 
 def matrix_divided(matrix, div):
-    """
+    """Divide all elements of a matrix by a given divisor.
 
+    Args:
+    matrix (list): A matrix (list of lists) of integers/floats.
+    div (int or float): The divisor.
 
+    Raises:
+    TypeError: If the matrix is not a matrix (list of lists) of
+    integers/floats,
+    each row of the matrix doesn't have the same size, or the divisor is not a
+    number.
+    ZeroDivisionError: If the divisor is zero.
+
+    Returns:
+    list: A new matrix with the divided values, rounded to two decimal
+    places.
     """
     if (not isinstance(matrix, list) or matrix == [] or
         not all(isinstance(row, list) for row in matrix) or
