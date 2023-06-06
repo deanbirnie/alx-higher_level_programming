@@ -3,3 +3,6 @@
 
 # emacs auto files
 *~
+
+# Byte compiled files
+__pycache__/
