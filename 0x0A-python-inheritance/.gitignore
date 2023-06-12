@@ -1,0 +1,8 @@
+# ALX provided files
+*main.py
+
+# emacs auto files
+*~
+
+# Byte-compiled files
+__pycache__/
