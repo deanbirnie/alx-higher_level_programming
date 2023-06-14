@@ -1,0 +1,8 @@
+# ignore all main files provided by ALX
+*main.py
+
+# ignore all emacs autosave files
+*~
+
+# ignore all byte compiled files
+__pycache__/
