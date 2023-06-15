@@ -1,5 +1,7 @@
 # ignore all main files provided by ALX
 *main.py
+8-main_2.py
+8-my_class.py
 
 # ignore all emacs autosave files
 *~
