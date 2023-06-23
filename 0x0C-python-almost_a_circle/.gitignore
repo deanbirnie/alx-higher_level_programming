@@ -1,5 +1,8 @@
 # ALX provided files:
 *main.py
 
+# ignore emacs autosave files
+*~
+
 # Ignore byte compiled files:
 __pycache__/
