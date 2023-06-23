@@ -99,6 +99,7 @@ class Rectangle(Base):
                                                        self.y,
                                                        self.width,
                                                        self.height)
+
     def to_dictionary(self):
         """Dictionary attributes"""
         my_dict = {
