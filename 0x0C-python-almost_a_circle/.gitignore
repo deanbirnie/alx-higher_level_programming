@@ -1,0 +1,5 @@
+# ALX provided files:
+*main.py
+
+# Ignore byte compiled files:
+__pycache__/
