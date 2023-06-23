@@ -101,7 +101,7 @@ class Rectangle(Base):
                                                        self.height)
     def to_dictionary(self):
         """Dictionary attributes"""
-        my_dict {
+        my_dict = {
             "id": self.id,
             "width": self.__width,
             "height": self.__height,
