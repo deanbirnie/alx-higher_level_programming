@@ -41,9 +41,9 @@ class Square(Rectangle):
         """Dictionary attributes"""
         my_dict =  {
             "id": self.id,
-            "size": self.__width,
-            "x": self.__x,
-            "y": self.__y
+            "size": self.width,
+            "x": self.x,
+            "y": self.y
         }
 
         return my_dict
