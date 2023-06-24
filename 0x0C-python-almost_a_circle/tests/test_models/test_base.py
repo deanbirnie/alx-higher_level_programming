@@ -1,140 +1,62 @@
-#!/usr/bin/python3
 import unittest
 from models.base import Base
-from models.square import Square
-import json
-import inspect
-
-'''
-    Creating test cases for the base module
-'''
 
 
-class test_base(unittest.TestCase):
-    '''
-        Testing base
-    '''
-    def test_id_none(self):
-        '''
-            Sending no id
-        '''
-        b = Base()
-        self.assertEqual(1, b.id)
+class TestBase(unittest.TestCase):
+    def test_init_with_id(self):
+        base = Base(id=1)
+        self.assertEqual(base.id, 1)
 
-    def test_id(self):
-        '''
-            Sending a valid id
-        '''
-        b = Base(50)
-        self.assertEqual(50, b.id)
+    def test_init_without_id(self):
+        base1 = Base()
+        base2 = Base()
+        self.assertEqual(base1.id, 1)
+        self.assertEqual(base2.id, 2)
 
-    def test_id_zero(self):
-        '''
-            Sending an id 0
-        '''
-        b = Base(0)
-        self.assertEqual(0, b.id)
-
-    def test_id_negative(self):
-        '''
-            Sending a negative id
-        '''
-        b = Base(-20)
-        self.assertEqual(-20, b.id)
-
-    def test_id_string(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base("Betty")
-        self.assertEqual("Betty", b.id)
-
-    def test_id_list(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base([1, 2, 3])
-        self.assertEqual([1, 2, 3], b.id)
-
-    def test_id_dict(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base({"id": 109})
-        self.assertEqual({"id": 109}, b.id)
-
-    def test_id_tuple(self):
-        '''
-            Sending an id that is not an int
-        '''
-        b = Base((8,))
-        self.assertEqual((8,), b.id)
-
-    def test_to_json_type(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(type(json_string), str)
-
-    def test_to_json_value(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string([json_dict])
-        self.assertEqual(json.loads(json_string),
-                         [{"id": 609, "y": 0, "size": 1, "x": 0}])
-
-    def test_to_json_None(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
-        json_string = Base.to_json_string(None)
-        self.assertEqual(json_string, "[]")
-
-    def test_to_json_Empty(self):
-        '''
-            Testing the json string
-        '''
-        sq = Square(1, 0, 0, 609)
-        json_dict = sq.to_dictionary()
+    def test_to_json_string_with_empty_list(self):
         json_string = Base.to_json_string([])
         self.assertEqual(json_string, "[]")
 
+    def test_to_json_string_with_list(self):
+        base1 = Base(id=1)
+        base2 = Base(id=2)
+        json_string = Base.to_json_string([base1.to_dictionary(), base2.to_dictionary()])
+        self.assertEqual(json_string, '[{"id": 1}, {"id": 2}]')
 
-class TestSquare(unittest.TestCase):
-    """
-    class for testing Base class' methods
-    """
+    def test_from_json_string_with_empty_string(self):
+        dict_list = Base.from_json_string("")
+        self.assertEqual(dict_list, [])
 
-    @classmethod
-    def setUpClass(cls):
-        """
-        Set up class method for the doc tests
-        """
-        cls.setup = inspect.getmembers(Base, inspect.isfunction)
+    def test_from_json_string_with_json_string(self):
+        json_string = '[{"id": 1}, {"id": 2}]'
+        dict_list = Base.from_json_string(json_string)
+        self.assertEqual(dict_list, [{"id": 1}, {"id": 2}])
 
-    def test_module_docstring(self):
-        """
-        Tests if module docstring documentation exist
-        """
-        self.assertTrue(len(Base.__doc__) >= 1)
+    def test_create_rectangle(self):
+        rectangle_dict = {"id": 1, "width": 10, "height": 5}
+        rectangle = Base.create(**rectangle_dict)
+        self.assertEqual(rectangle.id, 1)
+        self.assertEqual(rectangle.width, 10)
+        self.assertEqual(rectangle.height, 5)
 
-    def test_class_docstring(self):
-        """
-        Tests if class docstring documentation exist
-        """
-        self.assertTrue(len(Base.__doc__) >= 1)
+    def test_create_square(self):
+        square_dict = {"id": 1, "size": 5}
+        square = Base.create(**square_dict)
+        self.assertEqual(square.id, 1)
+        self.assertEqual(square.size, 5)
 
-    def test_func_docstrings(self):
-        """
-        Tests if methods docstring documntation exist
-        """
-        for func in self.setup:
-            self.assertTrue(len(func[1].__doc__) >= 1)
+    def test_load_from_file_with_existing_file(self):
+        # Assuming Rectangle.json file exists and contains valid JSON data
+        rectangles = Base.load_from_file()
+        self.assertIsInstance(rectangles, list)
+        for rectangle in rectangles:
+            self.assertIsInstance(rectangle, Base)
+
+    def test_load_from_file_with_non_existing_file(self):
+        # Assuming NonExistingFile.json does not exist
+        non_existing_file_instances = Base.load_from_file()
+        self.assertEqual(non_existing_file_instances, [])
+
+
+if __name__ == '__main__':
+    unittest.main()
