@@ -1,0 +1,4 @@
+# ignore emacs autosave files
+*~
+
+# ignore ALX provided files
