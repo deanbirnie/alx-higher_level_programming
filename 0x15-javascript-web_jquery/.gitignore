@@ -1,2 +1,5 @@
 # ignore emacs temporary files
 *~
+
+# ignore all html files provided by ALX
+*.html
